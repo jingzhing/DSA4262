@@ -32,3 +32,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+##python test_Model/random_Forest/predictions.py --data_json datasets/dataset0.json --model rftest.joblib --out_csv trainpredictions.csv
