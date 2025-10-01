@@ -1,9 +1,3 @@
-# training_hgb.py
-# Calibrated HistGradientBoosting model for Part 1
-# Requires: json_parse.py in the SAME directory exposing:
-#   parse(json_path, restrict_keys=None) -> (keys, X)
-# Keys are (transcript_id, transcript_position); X is a feature matrix.
-
 import argparse
 import numpy as np
 import pandas as pd
@@ -45,7 +39,7 @@ def main():
     y_map = {(r.transcript_id, int(r.transcript_position)): (int(r.label), r.gene_id)
              for r in labels.itertuples(index=False)}
 
-    # Pull features via teammate parser (already aggregated)
+    # Pull features via parser (already aggregated)
     keys, X = parse_json(args.json, restrict_keys=restrict)
     if len(keys) == 0:
         raise SystemExit("No overlap between JSON sites and labels.")
