@@ -1,0 +1,4 @@
+TEST ROC-AUC: 0.910372
+TEST PR-AUC: 0.498837
+THRESH (F1-opt from train): 0.308864
+BEST PARAMS: lr=0.06, nodes=127, min_leaf=20

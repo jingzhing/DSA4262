@@ -1,0 +1,5 @@
+TEST ROC-AUC: 0.907570
+TEST PR-AUC: 0.499295
+THRESH (F1-opt from train): 0.651786
+HGB PARAMS USED: lr=0.06, nodes=255, min_leaf=5
+XGB PARAMS USED: {"tree_method": "gpu_hist", "n_estimators": 800, "max_depth": 8, "learning_rate": 0.05, "subsample": 0.8, "colsample_bytree": 0.8, "scale_pos_weight": 21.83989745979958}

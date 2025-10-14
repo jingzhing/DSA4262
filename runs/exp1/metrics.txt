@@ -1,0 +1,12 @@
+TEST ROC-AUC: 0.563354
+TEST PR-AUC: 0.059564
+THRESH (F1-opt from train): 0.003344
+
+              precision    recall  f1-score   support
+
+           0      0.957     0.608     0.744     22648
+           1      0.060     0.479     0.107      1184
+
+    accuracy                          0.602     23832
+   macro avg      0.509     0.543     0.425     23832
+weighted avg      0.913     0.602     0.712     23832
