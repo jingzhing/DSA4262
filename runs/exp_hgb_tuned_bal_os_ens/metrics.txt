@@ -1,0 +1,4 @@
+TEST ROC-AUC: 0.909925
+TEST PR-AUC: 0.501217
+THRESH (F1-opt from train): 0.571919
+PARAMS USED: lr=0.06, nodes=255, min_leaf=5

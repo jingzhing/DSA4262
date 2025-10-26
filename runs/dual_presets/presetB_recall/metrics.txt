@@ -1,0 +1,5 @@
+TEST ROC-AUC: 0.909835
+TEST PR-AUC: 0.495524
+THRESH (F1-opt from train): 0.639133
+HGB PARAMS USED: lr=0.06, nodes=255, min_leaf=5
+XGB PARAMS USED: {"device": "cuda", "n_estimators": 1200, "max_depth": 8, "learning_rate": 0.05, "subsample": 0.8, "colsample_bytree": 0.8, "scale_pos_weight": 21.83989745979958}

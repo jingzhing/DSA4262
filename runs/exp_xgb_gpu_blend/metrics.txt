@@ -1,0 +1,5 @@
+TEST ROC-AUC: 0.908089
+TEST PR-AUC: 0.499678
+THRESH (F1-opt from train): 0.667696
+HGB PARAMS USED: lr=0.06, nodes=255, min_leaf=5
+XGB PARAMS USED: {"scale_pos_weight": 21.83989745979958}
