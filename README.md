@@ -25,10 +25,10 @@ Video Tutorial:
 
 ### 1. Connect to the Ronin (Ubuntu) Instance & create data folders
 ```bash
-ssh -i /xxx/key.pem ubuntu@<RONIN_IP>
+ssh -i "/xxx/key.pem" ubuntu@<RONIN_IP>
 ```
 ```bash
-mkdir -p ~/data_in ~/data_out ~/data_in/task1 ~/data_in/task2 ~/data_out/task1 ~/data_out/task2
+mkdir -p ~/data_in ~/data_out
 ```
 
 ### 2. Pull or Update the Docker Image
@@ -40,7 +40,7 @@ docker pull ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2
 From your **local machine**, copy any dataset to the remote instance:
 
 ```bash
-scp -i /xxx/key.pem "xxxx\xxxx\dataset2.json.gz" ubuntu@<RONIN_IP>:/data_in/
+scp -i "/xxx/key.pem" "xxxx\xxxx\dataset2.json.gz" ubuntu@<RONIN_IP>:data_in/
 ```
 ---
 
@@ -48,7 +48,14 @@ scp -i /xxx/key.pem "xxxx\xxxx\dataset2.json.gz" ubuntu@<RONIN_IP>:/data_in/
 Run Docker with mounted directories for input and output:
 
 ```bash
-docker run --rm   -v ~/data_in:/data_in   -v ~/data_out:/data_out   ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2   predict   --json /data_in/dataset2.json.gz   --model /opt/model/model_tuned.joblib   --output /data_out/preds2.csv
+docker run --rm \
+  -v ~/data_in:/data_in \
+  -v ~/data_out:/data_out \
+  ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2 \
+  predict \
+  --json /data_in/dataset2.json.gz \
+  --model /opt/model/model_tuned.joblib \
+  --output /data_out/dataset2_preds.csv
 ```
 
 The output file will appear in:
