@@ -67,7 +67,7 @@ The output file will appear in:
 
 From your local terminal:
 ```bash
-scp -i /xxx/key.pem ubuntu@<RONIN_IP>:~/data_out/*_wGHOST.csv ~/Downloads/
+scp -i "/xxx/key.pem" ubuntu@<RONIN_IP>:~/data_out/*.csv "xxx/Downloads/"
 ```
 
 **Maintainer:**  
