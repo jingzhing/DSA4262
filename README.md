@@ -1,22 +1,69 @@
-# DSA4262
+# 🧬 m6A-HGB-GHOST Inference Pipeline (Docker Edition)
 
-How 2 Run With Docker... Check Ronin Instance Now. Dir will show data_in and data_out respectively. I have run 1 for task 1 dataset1 and task 2 SGNex_A549_directRNA_replicate5_run1.
+This repository contains the **Dockerized inference pipeline** for the m6A-HGB-GHOST model, designed to predict m6A modification sites across SG-NEx and other RNA datasets.
 
-To Do:
-Run the remaining tasks1 and task2 files inside the same ronin instance
-Docker Image of model is uploaded to this git under packages.
+---
 
-Once in utunbu for the instance: 
-1) Pull the image into the cloud:          docker pull ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2 (if its not there or if any updates)
-2) Try to run the dataset from task1: by first copying into cloud (for your convinience):            scp -i ~/xxx.pem C:\Users\xxxx\xxxx\dataset2.json.gz ubuntu@xxxxx:~/data_in/
-3) Run and produce output file            docker run --rm \-v ~/data_in:/data_in \-v ~/data_out:/data_out \ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2 \predict --json /data_in/dataset2.json.gz \--model /opt/model/model_tuned.joblib \--output /data_out/preds2.csv
-4) Pull all task 2 files into local (?) Idk if its a good idea but this code works, dont change anything just cd into data_in folder and run:                                                                                                                               while read run; do   echo "Downloading $run";   aws s3 cp --no-sign-request     s3://sg-nexdata/data/processed_data/m6Anet/${run}/data.json     ~/data_in/task2/${run}.json; done < runlist.txt
-5) Run Predict on the json files that will be auto-labelled. Double check also that im using the correct file... lol it should be 
-http://sg-nex-data.s3-website-ap-southeast-1.amazonaws.com/#data/processed_data/m6Anet/
-code: docker run --rm \
-  -v ~/data_in:/data_in \
-  -v ~/data_out:/data_out \
-  ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2 \
-  predict --json /data_in/task2/SGNex_A549_directRNA_replicate5_run1.json \
-          --model /opt/model/model_tuned.joblib \
-          --output /data_out/task2/SGNex_A549_directRNA_replicate5_run1_preds.csv
+## 📦 Overview
+
+- The **Docker image** is available under this repository’s **Packages** section:
+  ```
+  ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2
+  ```
+
+- The Ronin instance or any compatible Ubuntu cloud VM should have two directories:
+  ```
+  ~/data_in/     # input JSON or JSON.GZ datasets
+  ~/data_out/    # model prediction outputs
+  ```
+- To test, you can just use the any dataset given for the project.
+
+
+## 🚀 How to Run with Docker on RONIN (Start a Docker Machine instead of an utunbu one)
+
+Video Tutorial: 
+
+### 1. Connect to the Ronin (Ubuntu) Instance & create data folders
+```bash
+ssh -i /xxx/key.pem ubuntu@<RONIN_IP>
+```
+```bash
+mkdir -p ~/data_in ~/data_out ~/data_in/task1 ~/data_in/task2 ~/data_out/task1 ~/data_out/task2
+```
+
+### 2. Pull or Update the Docker Image
+```bash
+docker pull ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2
+```
+
+### 3. Upload Your Dataset to the Cloud
+From your **local machine**, copy any dataset to the remote instance:
+
+```bash
+scp -i /xxx/key.pem "xxxx\xxxx\dataset2.json.gz" ubuntu@<RONIN_IP>:/data_in/
+```
+---
+
+### 4. Run Inference on a Dataset
+Run Docker with mounted directories for input and output:
+
+```bash
+docker run --rm   -v ~/data_in:/data_in   -v ~/data_out:/data_out   ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2   predict   --json /data_in/dataset2.json.gz   --model /opt/model/model_tuned.joblib   --output /data_out/preds2.csv
+```
+
+The output file will appear in:
+```
+~/data_out/preds2.csv
+```
+
+## 📤 Copy All Outputs Back to Local
+
+From your local terminal:
+```bash
+scp -i /xxx/key.pem ubuntu@<RONIN_IP>:~/data_out/*_wGHOST.csv ~/Downloads/
+```
+
+**Maintainer:**  
+👤 *exonintron group*  
+
+
