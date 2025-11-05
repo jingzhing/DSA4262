@@ -53,9 +53,10 @@ docker run --rm \
   -v ~/data_out:/data_out \
   ghcr.io/jingzhing/m6a-hgb-ghost-infer:v2 \
   predict \
-  --json /data_in/dataset2.json.gz \ 
+  --json /data_in/dataset2.json.gz \
   --model /opt/model/model_tuned.joblib \
-  --output /data_out/dataset2_preds.csv
+  --output /data_out/dataset2_preds.csv \
+  --emit labels
 ```
 
 The output file will appear in:
